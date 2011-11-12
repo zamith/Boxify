@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= "Boxify" %></title>
+    <title>Boxify</title>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag :defaults %>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css">
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
   </head>
+
   <body>
-    <div id="container">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-      <%= content_tag :h1, yield(:title) if show_title? %>
-      <div class="banner">
-	  <div class="logo">
-	    <%= image_tag "Boxify.jpg" %>
-	    <span class="product-name">Boxify</span>
-	  </div>
+    <div id="wrapper">
+      <div id="header">
+        <span id="product-name">Boxify</span>
+  
+        <div id="user-management">
+          <% if user_signed_in? %>
+            <div class="user-name"><%= current_user.email %></div>
+            <div class="logout"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></div>
+          <% else %>
+            <div class="sign-in"><%= link_to "Sign in", new_user_session_path %></div>
+            <div class="sign-up"><%= link_to "Sign up", new_user_registration_path %></div>
+          <% end %>
+        </div>
+      </div>
+  
+      <div id="content">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <%= content_tag :h1, yield(:title) if show_title? %>
+  
+        <div id="main">
+          <%= yield %>
+        </div>
 
-
-	  <div class="user-management">
-	    <% if user_signed_in? %>
-	      <div class="user-name"><%= current_user.email %></div>
-	      <div class="logout"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></div>
-	    <% else %>	
-	      <div class="sign-in"><%= link_to "Sign in", new_user_session_path %></div>
-	      <div class="sign-up"><%= link_to "Sign up", new_user_registration_path %></div>
-	    <% end %>
-	  </div>
-	
-	  <div class="inner-container">
-	    <%= yield %>
-	  </div>
-	
-	  <div class="sidebar">
-		<%= link_to "Warehouses", warehouses_path %>
-		<%= yield :sidebar %>
-	  </div>	
-	
-	</div>
-
-	
+        <div class="sidebar">
+          <%= link_to "Warehouses", warehouses_path %>
+          <%= yield :sidebar %>
+        </div>	
+      </div>
     </div>
   </body>
 </html>
