@@ -1,0 +1,37 @@
+// Place all the styles related to the boxes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.title {
+	text-align: center;
+}
+
+.logo {
+	float:left;
+	img {
+		height: 200px;  
+    }
+    .product-name {
+		display:block;
+		margin-top:20px;
+		text-align:center;
+		font-family: 'Tangerine', serif;
+		font-size: 54px;
+		text-shadow: 4px 4px 4px #aaa;	
+	}
+}
+
+.banner {
+	height:100px;
+}
+
+.user-management {
+	float:right;
+	.user-name,sign-in {
+		float:left;
+		margin-right:10px;
+	}
+	.logout,sign-up {
+		float:right;
+	}
+}
