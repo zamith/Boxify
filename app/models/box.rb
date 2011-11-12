@@ -11,8 +11,7 @@ class Box < ActiveRecord::Base
   end
   
   def create_qr_code(path)
-    text = "Box: #{self.id}\n#{path}"
-    qrcode = QREncoder.encode(text)
+    qrcode = QREncoder.encode(path)
     qrcode.png(:pixels_per_module => 15).save("public/box#{self.id}.png")
   end  
   

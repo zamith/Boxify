@@ -5,7 +5,9 @@ class WarehousesController < ApplicationController
   end  
   
   def new
-    @warehouse = Warehouse.create :user => current_user
+    @warehouse = Warehouse.new
+    @warehouse.user = current_user
+    @warehouse.save
     flash[:notice] = "Created Warehouse #{@warehouse.id}"
     redirect_to new_warehouse_box_path(@warehouse)
   end  

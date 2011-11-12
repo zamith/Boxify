@@ -19,8 +19,12 @@ class BoxesController < ApplicationController
     @box = Box.new
     @search = Box.search do
         fulltext params[:search]
-      end
-    @boxes = @search.results
+      end  
+    if params[:search]  
+      @boxes = @search.results 
+    else
+      @boxes = []
+    end    
   end
   
   def create
