@@ -1,9 +1,11 @@
 <% if user_signed_in? %>
-  <% @items.each do |item| %>
-    <%= "Item #{item.id}: #{item.name}" %>
-  <% end %>
+  <ul class="items-list">
+    <% @items.each do |item| %>
+      <li><%= link_to "Item #{item.id}: #{item.name}", warehouse_box_item_path(@warehouse, @box, item), :method => :get %></li>
+    <% end %>
+  </ul>
   
-  <%= semantic_form_for @item, :url => warehouse_boxes_path(@warehouse,@box) do |f| %>
+  <%= semantic_form_for @item, :url =>  warehouse_box_items_path(@warehouse,@box) do |f| %>
     <%= f.inputs do %>
 	  <%= f.input :name %>
       <%= f.input :description %>
@@ -13,5 +15,10 @@
     <%= f.buttons do %>
       <%= f.commit_button %>
     <% end %>
+  <% end %>
+
+  <% content_for :sidebar do %>
+    <%= link_to "Boxes", warehouse_path(@warehouse) %>
+    <%= link_to "Category", new_category_path %>
   <% end %>
 <% end %>

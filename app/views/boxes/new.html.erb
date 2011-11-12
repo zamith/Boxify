@@ -1,8 +1,13 @@
 <% if user_signed_in? %>
   <h2><%= "Warehouse #{@warehouse.id}" %></h2>
-  <% @boxes.each do |box| %>
-    <%= link_to "Box #{box.id}: #{box.description}", warehouse_box_path(@warehouse,box) %>
-  <% end %>
+  <ul class="boxes-list">
+    <% @boxes.each do |box| %>
+      <li>
+        <span class="box-link"><%= link_to "Box #{box.id}: #{box.description}", warehouse_box_path(@warehouse,box) %></span>
+        <span class="qr-link"><%= link_to "Create QR Code", warehouse_box_qrCode_path(@warehouse,box) %></span>
+      </li>
+    <% end %>
+  </ul>
   
   <%= semantic_form_for @box, :url => warehouse_boxes_path(@warehouse) do |f| %>
     <%= f.inputs do %>
@@ -11,5 +16,14 @@
     <%= f.buttons do %>
       <%= f.commit_button %>
     <% end %>
+  <% end %>
+
+  <% content_for :sidebar do %>
+    <%= form_tag new_warehouse_box_path(@warehouse), :method => :get do %>
+	  <p>
+	    <%= text_field_tag :search, params[:search] %>
+	    <%= submit_tag "Search", :name => nil %>
+	  </p>
+	<% end %>
   <% end %>
 <% end %>

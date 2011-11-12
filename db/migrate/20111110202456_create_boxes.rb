@@ -1,7 +1,7 @@
 class CreateBoxes < ActiveRecord::Migration
   def up
     create_table :boxes do |t|
-      t.string  :description
+      t.string  :description, :limit => 140
       t.references :warehouse
       
       t.timestamps

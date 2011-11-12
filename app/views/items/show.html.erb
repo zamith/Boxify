@@ -1,0 +1,10 @@
+<div class="item">
+  <span class="name"><%= @item.name %></span>
+  <span class="description"><%= @item.description %></span>
+</div>	
+
+<% content_for :sidebar do %>
+  <%= link_to "Boxes", warehouse_path(@warehouse) %>
+  <%= link_to "Items", warehouse_box_path(@warehouse,@box) %>
+  <%= link_to "Category", new_category_path %>
+<% end %>

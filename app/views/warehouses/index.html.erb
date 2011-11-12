@@ -1,9 +1,7 @@
 <% if user_signed_in? %>
-  <% if @warehouses.empty? %>
-    <%= button_to "Create Warehouse", new_warehouse_path, :method => :get  %>
-  <% else %>
-    <% @warehouses.each do |warehouse| %>
-      <%= link_to "Warehouse #{warehouse.id}", warehouse_path(warehouse)  %>
-    <% end %>
-  <% end %>	
+  <% @warehouses.each do |warehouse| %>
+    <%= link_to "Warehouse #{warehouse.id}", warehouse_path(warehouse)  %>
+  <% end %>
+ 
+  <%= button_to "Create Warehouse", new_warehouse_path, :method => :get  %>
 <% end %>
