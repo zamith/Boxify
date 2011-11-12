@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <% @items.each do |item| %>
+    <%= "Item #{item.id}: #{item.name}" %>
+  <% end %>
+  
+  <%= semantic_form_for @item, :url => warehouse_boxes_path(@warehouse,@box) do |f| %>
+    <%= f.inputs do %>
+	  <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :quantity %>
+      <%= f.input :category %>
+    <% end %>
+    <%= f.buttons do %>
+      <%= f.commit_button %>
+    <% end %>
+  <% end %>
+<% end %>

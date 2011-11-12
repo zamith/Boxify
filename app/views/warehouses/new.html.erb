@@ -1,0 +1,4 @@
+<% if user_signed_in? %>
+  <h2><%= "Warehouse #{@warehouse.id}" %>
+  <%= button_to "Add Box", new_warehouse_box_path(@warehouse), :method => :get  %>
+<% end %>

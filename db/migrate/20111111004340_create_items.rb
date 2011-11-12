@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.integer :quantity
       t.text :description
-      t.references :user
+      t.references :box
       t.references :category
 
       t.timestamps
