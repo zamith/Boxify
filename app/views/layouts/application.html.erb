@@ -10,7 +10,7 @@
   </head>
 
   <body>
-	<div id="wrapper">
+    <div id="wrapper">
       <div id="header">
         <span id="product-name">Boxify</span>
   
@@ -34,6 +34,11 @@
         <div id="main">
           <%= yield %>
         </div>
+
+        <div class="sidebar">
+          <%= link_to "Warehouses", warehouses_path %>
+          <%= yield :sidebar %>
+        </div>	
       </div>
     </div>
   </body>

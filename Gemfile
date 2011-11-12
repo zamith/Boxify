@@ -20,6 +20,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem "nifty-generators"
 gem 'formtastic'
+gem 'sunspot_rails'
+gem 'qrencoder'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,24 +1,31 @@
 class BoxesController < ApplicationController
   
-  def index
-    @user_boxes = current_user.warehouses
+  def qrCode
+    Box.find(params[:box_id]).create_qr_code
   end  
   
   def show
-    @box = Box.find params[:box_id]
+    @box = Box.find params[:id]
     @warehouse = Warehouse.find params[:warehouse_id]
+    @items = @box.items
+    @item = Item.new
+    render "items/new"
   end  
   
   def new
     @warehouse = Warehouse.find params[:warehouse_id]
     @box = Box.new
-    @boxes = @warehouse.boxes
+    @search = Box.search do
+        fulltext params[:search]
+      end
+    @boxes = @search.results
   end
   
   def create
     @warehouse = Warehouse.find params[:warehouse_id]
     @boxes = @warehouse.boxes
     @box = Box.new params[:box]
+    @box.warehouse = @warehouse
     if @box.save
       flash[:notice] = "Yey, a box!"
       redirect_to new_warehouse_box_item_path(@warehouse,@box)    
