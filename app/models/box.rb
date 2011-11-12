@@ -10,8 +10,10 @@ class Box < ActiveRecord::Base
     text :items do items.map(&:name) + items.map(&:description) end
   end
   
-  def create_qr_code
-    p "Hello"
+  def create_qr_code(path)
+    text = "Box: #{self.id}\n#{path}"
+    qrcode = QREncoder.encode(text)
+    qrcode.png(:pixels_per_module => 15).save("public/box#{self.id}.png")
   end  
   
 end
