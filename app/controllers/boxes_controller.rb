@@ -1,7 +1,9 @@
 class BoxesController < ApplicationController
   
   def qrCode
-    Box.find(params[:box_id]).create_qr_code
+    @box = Box.find(params[:box_id])
+    @warehouse = Warehouse.find params[:warehouse_id]
+    @box.create_qr_code(warehouse_box_url(@warehouse,@box))
   end  
   
   def show
